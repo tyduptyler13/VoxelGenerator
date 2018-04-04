@@ -6,7 +6,7 @@ using UnrealBuildTool;
 public class PolyVox : ModuleRules
 {
 
-	public PolyVox(TargetInfo Target)
+	public PolyVox(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PublicIncludePaths.AddRange(
 			new string[] {
