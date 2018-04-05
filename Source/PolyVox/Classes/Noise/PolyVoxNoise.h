@@ -82,7 +82,7 @@
 		Distance2Div	UMETA(DisplayName = "Distance2Div")
 	};
 
-	USTRUCT()
+	USTRUCT(Blueprintable)
 	struct FVoxelNoiseSettings
 	{
 		GENERATED_BODY()
