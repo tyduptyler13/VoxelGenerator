@@ -36,69 +36,73 @@ SOFTWARE.
  * 
  */
 UCLASS(BlueprintType)
-class POLYVOX_API APagedChunk : public AActor
-{
-	friend class UPagedVolumeComponent;
-	GENERATED_BODY()
+class POLYVOX_API APagedChunk : public AActor {
+    friend class UPagedVolumeComponent;
+    GENERATED_BODY()
 public:
-	APagedChunk();
-	~APagedChunk();
+    APagedChunk();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mesh")
-	UVoxelProceduralMeshComponent* VoxelMesh;
-	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Voxels")
-	FRegion ChunkRegion;
-	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Voxels")
-	bool bDueToBePagedOut;
+    ~APagedChunk();
 
-	UFUNCTION(BlueprintCallable, Category = "Chunk|Voxels")
-	void InitChunk(FVector Position, uint8 ChunkSideLength, UPager* VoxelPager = nullptr, float VoxelSize = 100.0f, int32 Seed = 123);
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mesh")
+    UVoxelProceduralMeshComponent *VoxelMesh;
+    UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Voxels")
+    FRegion ChunkRegion;
+    UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Voxels")
+    bool bDueToBePagedOut;
 
-	UFUNCTION(BlueprintCallable, Category = "Chunk|Voxels")
-	void RemoveChunk();
+    UFUNCTION(BlueprintCallable, Category = "Chunk|Voxels")
+    void InitChunk(FVector Position, uint8 ChunkSideLength, UPager *VoxelPager = nullptr, float VoxelSize = 100.0f,
+                   int32 Seed = 123);
 
-	UFUNCTION(BlueprintPure, Category="Chunk|Voxels")
-	TArray<FVoxel> GetData() const;
-	UFUNCTION(BlueprintPure, Category = "Chunk|Size")
-	int32 GetDataSizeInBytes() const;
+    UFUNCTION(BlueprintCallable, Category = "Chunk|Voxels")
+    void RemoveChunk();
 
-	UFUNCTION(BlueprintPure, Category = "Chunk|Voxels")
-	FVoxel GetVoxelByCoordinatesWorldSpace(int32 XPos, int32 YPos, int32 ZPos);
-	UFUNCTION(BlueprintPure, Category = "Chunk|Voxels")
-	FVoxel GetVoxelByCoordinatesChunkSpace(int32 XPos, int32 YPos, int32 ZPos);
+    UFUNCTION(BlueprintPure, Category = "Chunk|Voxels")
+    TArray<FVoxel> GetData() const;
 
-	UFUNCTION(BlueprintCallable, Category = "Chunk|Voxels")
-	void SetVoxelByCoordinatesWorldSpace(int32 XPos, int32 YPos, int32 ZPos, FVoxel Value);
-	UFUNCTION(BlueprintCallable, Category = "Chunk|Voxels")
-	void SetVoxelByCoordinatesChunkSpace(int32 XPos, int32 YPos, int32 ZPos, FVoxel Value);
+    UFUNCTION(BlueprintPure, Category = "Chunk|Size")
+    int32 GetDataSizeInBytes() const;
 
-	UFUNCTION(BlueprintCallable, Category = "Volume|Mesh")
-	void CreateMarchingCubesMesh(UPagedVolumeComponent* Volume, TArray<FVoxelMaterial> VoxelMaterials);
-	
-	FVoxel GetDataAtIndex(const int32 CurrentVoxelIndex) const;
+    UFUNCTION(BlueprintPure, Category = "Chunk|Voxels")
+    FVoxel GetVoxelByCoordinatesWorldSpace(int32 XPos, int32 YPos, int32 ZPos);
 
-	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Random")
-	int32 RandomSeed;
+    UFUNCTION(BlueprintPure, Category = "Chunk|Voxels")
+    FVoxel GetVoxelByCoordinatesChunkSpace(int32 XPos, int32 YPos, int32 ZPos);
+
+    UFUNCTION(BlueprintCallable, Category = "Chunk|Voxels")
+    void SetVoxelByCoordinatesWorldSpace(int32 XPos, int32 YPos, int32 ZPos, FVoxel Value);
+
+    UFUNCTION(BlueprintCallable, Category = "Chunk|Voxels")
+    void SetVoxelByCoordinatesChunkSpace(int32 XPos, int32 YPos, int32 ZPos, FVoxel Value);
+
+    UFUNCTION(BlueprintCallable, Category = "Volume|Mesh")
+    void CreateMarchingCubesMesh(UPagedVolumeComponent *Volume, TArray<FVoxelMaterial> VoxelMaterials);
+
+    FVoxel GetDataAtIndex(const int32 CurrentVoxelIndex) const;
+
+    UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Random")
+    int32 RandomSeed;
 
 private:
-	static int32 CalculateSizeInBytes(uint8 ChunkSideLength);
+    static int32 CalculateSizeInBytes(uint8 ChunkSideLength);
 
-	// This is so we can tell whether a uncompressed chunk has to be recompressed and whether
-	// a compressed chunk has to be paged back to disk, or whether they can just be discarded.
-	UPROPERTY()
-	bool bDataModified;
-	UPROPERTY()
-	bool bNeedsNewMarchingCubesMesh;
+    // This is so we can tell whether a uncompressed chunk has to be recompressed and whether
+    // a compressed chunk has to be paged back to disk, or whether they can just be discarded.
+    UPROPERTY()
+    bool bDataModified;
+    UPROPERTY()
+    bool bNeedsNewMarchingCubesMesh;
 
-	UPROPERTY()
-	TArray<FVoxel> VoxelData;
-	UPROPERTY()
-	uint8 SideLength;
-	UPROPERTY()
-	uint8 SideLengthPower;
-	UPROPERTY()
-	UPager* Pager;
+    UPROPERTY()
+    TArray<FVoxel> VoxelData;
+    UPROPERTY()
+    uint8 SideLength;
+    UPROPERTY()
+    uint8 SideLengthPower;
+    UPROPERTY()
+    UPager *Pager;
 
-	UPROPERTY()
-	FVector ChunkSpacePosition;
+    UPROPERTY()
+    FVector ChunkSpacePosition;
 };

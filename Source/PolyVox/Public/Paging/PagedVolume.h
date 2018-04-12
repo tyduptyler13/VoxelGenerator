@@ -34,19 +34,18 @@ SOFTWARE.
 /**
  * 
  */
- UCLASS(Blueprintable)
-class POLYVOX_API APagedVolume : public AActor
-{
-	GENERATED_BODY()
+UCLASS(Blueprintable)
+class POLYVOX_API APagedVolume : public AActor {
+    GENERATED_BODY()
 public:
-	APagedVolume();
+    APagedVolume();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Volume")
-	UPagedVolumeComponent* PagedVolumeComponent;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Volume")
+    UPagedVolumeComponent *PagedVolumeComponent;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Voxels")
-	TArray<FVoxelMaterial> VolumeLandMaterials;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Voxels")
+    TArray<FVoxelMaterial> VolumeLandMaterials;
 
-	UFUNCTION(BlueprintCallable, Category = "Volume")
-	UPagedVolumeComponent* GetPagedVolume() const;
+    UFUNCTION(BlueprintCallable, Category = "Volume")
+    UPagedVolumeComponent *GetPagedVolume() const;
 };

@@ -44,190 +44,154 @@ SOFTWARE.
 #define NEG_Z_DELTA (-(deltaZ[this->ZPosInChunk-1]))
 #define POS_Z_DELTA (deltaZ[this->ZPosInChunk])
 
-static const std::array<int32, 256> deltaX = {{ 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 28087, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 224695, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 28087, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 1797559, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 28087, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 224695, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 28087, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1 }};
-static const std::array<int32, 256> deltaY = {{ 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 56174, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 449390, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 56174, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 3595118, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 56174, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 449390, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 56174, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2 }};
-static const std::array<int32, 256> deltaZ = {{ 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 112348, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 898780, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 112348, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 7190236, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 112348, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 898780, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 112348, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4 }};
+static const std::array<int32, 256> deltaX = {{1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 28087, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 224695, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 28087, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 1797559, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 28087, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 224695, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 28087, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1, 3511, 1, 7, 1, 55, 1, 7, 1, 439, 1, 7, 1, 55, 1, 7, 1}};
+static const std::array<int32, 256> deltaY = {{2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 56174, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 449390, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 56174, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 3595118, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 56174, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 449390, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 56174, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2, 7022, 2, 14, 2, 110, 2, 14, 2, 878, 2, 14, 2, 110, 2, 14, 2}};
+static const std::array<int32, 256> deltaZ = {{4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 112348, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 898780, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 112348, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 7190236, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 112348, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 898780, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 112348, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4, 14044, 4, 28, 4, 220, 4, 28, 4, 1756, 4, 28, 4, 220, 4, 28, 4}};
 
 
-UVolumeSampler::UVolumeSampler(UPagedVolumeComponent* VolumeData)
-{
-	checkf(VolumeData != NULL, TEXT("Provided volume cannot be null"));
-	Volume = VolumeData;
-	ChunkSideLengthMinusOne = Volume->GetChunkSideLength() - 1;
+UVolumeSampler::UVolumeSampler(UPagedVolumeComponent *VolumeData) {
+    checkf(VolumeData != NULL, TEXT("Provided volume cannot be null"));
+    Volume = VolumeData;
+    ChunkSideLengthMinusOne = Volume->GetChunkSideLength() - 1;
 }
 
-UVolumeSampler::UVolumeSampler(const UVolumeSampler& Sampler)
-{
-	Volume = Sampler.Volume;
-	ChunkSideLengthMinusOne = Volume->GetChunkSideLength() - 1;
+UVolumeSampler::UVolumeSampler(const UVolumeSampler &Sampler) {
+    Volume = Sampler.Volume;
+    ChunkSideLengthMinusOne = Volume->GetChunkSideLength() - 1;
 
-	XPosInVolume = Sampler.XPosInVolume;
-	YPosInVolume = Sampler.YPosInVolume;
-	ZPosInVolume = Sampler.ZPosInVolume;
+    XPosInVolume = Sampler.XPosInVolume;
+    YPosInVolume = Sampler.YPosInVolume;
+    ZPosInVolume = Sampler.ZPosInVolume;
 
-	XPosInChunk = Sampler.XPosInChunk;
-	YPosInChunk = Sampler.YPosInChunk;
-	ZPosInChunk = Sampler.ZPosInChunk;
+    XPosInChunk = Sampler.XPosInChunk;
+    YPosInChunk = Sampler.YPosInChunk;
+    ZPosInChunk = Sampler.ZPosInChunk;
 
-	CurrentVoxelIndex = Sampler.CurrentVoxelIndex;
-	CurrentChunk = Sampler.CurrentChunk;
+    CurrentVoxelIndex = Sampler.CurrentVoxelIndex;
+    CurrentChunk = Sampler.CurrentChunk;
 }
 
-FVoxel UVolumeSampler::GetVoxel()
-{
-	if (CurrentChunk == NULL)
-	{
-		UE_LOG(LogPolyVox, Log, TEXT("Current chunk was null. Getting by coordinates."));
-		return Volume->GetVoxelByCoordinates(XPosInVolume, YPosInVolume, ZPosInVolume);
-	}
-	else
-	{
-		return CurrentChunk->GetDataAtIndex(CurrentVoxelIndex);
-	}
+FVoxel UVolumeSampler::GetVoxel() {
+    if (CurrentChunk == NULL) {
+        UE_LOG(LogPolyVox, Log, TEXT("Current chunk was null. Getting by coordinates."));
+        return Volume->GetVoxelByCoordinates(XPosInVolume, YPosInVolume, ZPosInVolume);
+    } else {
+        return CurrentChunk->GetDataAtIndex(CurrentVoxelIndex);
+    }
 }
 
-void UVolumeSampler::SetPosition(int32 XPos, int32 YPos, int32 ZPos)
-{
-	if (Volume == NULL)
-	{
-		UE_LOG(LogPolyVox, Fatal, TEXT("Sampler volume was null!"));
-		return;
-	}
-	XPosInVolume = XPos;
-	YPosInVolume = YPos;
-	ZPosInVolume = ZPos;
+void UVolumeSampler::SetPosition(int32 XPos, int32 YPos, int32 ZPos) {
+    if (Volume == NULL) {
+        UE_LOG(LogPolyVox, Fatal, TEXT("Sampler volume was null!"));
+        return;
+    }
+    XPosInVolume = XPos;
+    YPosInVolume = YPos;
+    ZPosInVolume = ZPos;
 
-	// Then we update the voxel pointer
-	uint8 sideLengthPower = Volume->GetSideLengthPower();
-	if (sideLengthPower > 0)
-	{
-		const int32 xChunk = XPosInVolume >> sideLengthPower;
-		const int32 yChunk = YPosInVolume >> sideLengthPower;
-		const int32 zChunk = ZPosInVolume >> sideLengthPower;
+    // Then we update the voxel pointer
+    uint8 sideLengthPower = Volume->GetSideLengthPower();
+    if (sideLengthPower > 0) {
+        const int32 xChunk = XPosInVolume >> sideLengthPower;
+        const int32 yChunk = YPosInVolume >> sideLengthPower;
+        const int32 zChunk = ZPosInVolume >> sideLengthPower;
 
-		XPosInChunk = (XPosInVolume - (xChunk << sideLengthPower));
-		YPosInChunk = (YPosInVolume - (yChunk << sideLengthPower));
-		ZPosInChunk = (ZPosInVolume - (zChunk << sideLengthPower));
+        XPosInChunk = (XPosInVolume - (xChunk << sideLengthPower));
+        YPosInChunk = (YPosInVolume - (yChunk << sideLengthPower));
+        ZPosInChunk = (ZPosInVolume - (zChunk << sideLengthPower));
 
-		uint32 voxelIndexInChunk = morton256_x[XPosInChunk] | morton256_y[YPosInChunk] | morton256_z[ZPosInChunk];
+        uint32 voxelIndexInChunk = morton256_x[XPosInChunk] | morton256_y[YPosInChunk] | morton256_z[ZPosInChunk];
 
-		if (Volume->CanReuseLastAccessedChunk(xChunk, yChunk, zChunk))
-		{
-			CurrentChunk = Volume->GetLastAccessedChunk();
-		}
-		else
-		{
-			CurrentChunk = Volume->GetChunk(xChunk, yChunk, zChunk);
-		}
+        if (Volume->CanReuseLastAccessedChunk(xChunk, yChunk, zChunk)) {
+            CurrentChunk = Volume->GetLastAccessedChunk();
+        } else {
+            CurrentChunk = Volume->GetChunk(xChunk, yChunk, zChunk);
+        }
 
-		CurrentVoxelIndex = voxelIndexInChunk;
-	}
+        CurrentVoxelIndex = voxelIndexInChunk;
+    }
 }
 
 
-void UVolumeSampler::MoveNegativeX()
-{
-	XPosInVolume--;
+void UVolumeSampler::MoveNegativeX() {
+    XPosInVolume--;
 
-	// Then we update the voxel pointer
-	if (CAN_GO_NEG_X(XPosInChunk))
-	{
-		//No need to compute new chunk.
-		CurrentVoxelIndex += NEG_X_DELTA;
-		XPosInChunk--;
-	}
-	else
-	{
-		//We've hit the chunk boundary. Just calling setPosition() is the easiest way to resolve this.
-		SetPosition(XPosInVolume, YPosInVolume, ZPosInVolume);
-	}
+    // Then we update the voxel pointer
+    if (CAN_GO_NEG_X(XPosInChunk)) {
+        //No need to compute new chunk.
+        CurrentVoxelIndex += NEG_X_DELTA;
+        XPosInChunk--;
+    } else {
+        //We've hit the chunk boundary. Just calling setPosition() is the easiest way to resolve this.
+        SetPosition(XPosInVolume, YPosInVolume, ZPosInVolume);
+    }
 }
 
-void UVolumeSampler::MovePositiveX()
-{
-	XPosInVolume++;
+void UVolumeSampler::MovePositiveX() {
+    XPosInVolume++;
 
-	// Then we update the voxel pointer
-	if (CAN_GO_POS_X(XPosInChunk))
-	{
-		//No need to compute new chunk.
-		CurrentVoxelIndex += POS_X_DELTA;
-		XPosInChunk++;
-	}
-	else
-	{
-		//We've hit the chunk boundary. Just calling setPosition() is the easiest way to resolve this.
-		SetPosition(XPosInVolume, YPosInVolume, ZPosInVolume);
-	}
+    // Then we update the voxel pointer
+    if (CAN_GO_POS_X(XPosInChunk)) {
+        //No need to compute new chunk.
+        CurrentVoxelIndex += POS_X_DELTA;
+        XPosInChunk++;
+    } else {
+        //We've hit the chunk boundary. Just calling setPosition() is the easiest way to resolve this.
+        SetPosition(XPosInVolume, YPosInVolume, ZPosInVolume);
+    }
 }
 
-void UVolumeSampler::MoveNegativeY()
-{
-	YPosInVolume--;
+void UVolumeSampler::MoveNegativeY() {
+    YPosInVolume--;
 
-	// Then we update the voxel pointer
-	if (CAN_GO_NEG_Y(YPosInChunk))
-	{
-		//No need to compute new chunk.
-		CurrentVoxelIndex += NEG_Y_DELTA;
-		YPosInChunk--;
-	}
-	else
-	{
-		//We've hit the chunk boundary. Just calling setPosition() is the easiest way to resolve this.
-		SetPosition(XPosInVolume, YPosInVolume, ZPosInVolume);
-	}
+    // Then we update the voxel pointer
+    if (CAN_GO_NEG_Y(YPosInChunk)) {
+        //No need to compute new chunk.
+        CurrentVoxelIndex += NEG_Y_DELTA;
+        YPosInChunk--;
+    } else {
+        //We've hit the chunk boundary. Just calling setPosition() is the easiest way to resolve this.
+        SetPosition(XPosInVolume, YPosInVolume, ZPosInVolume);
+    }
 }
 
-void UVolumeSampler::MovePositiveY()
-{
-	YPosInVolume++;
+void UVolumeSampler::MovePositiveY() {
+    YPosInVolume++;
 
-	// Then we update the voxel pointer
-	if (CAN_GO_POS_Y(YPosInChunk))
-	{
-		//No need to compute new chunk.
-		CurrentVoxelIndex += POS_Y_DELTA;
-		YPosInChunk++;
-	}
-	else
-	{
-		//We've hit the chunk boundary. Just calling setPosition() is the easiest way to resolve this.
-		SetPosition(XPosInVolume, YPosInVolume, ZPosInVolume);
-	}
+    // Then we update the voxel pointer
+    if (CAN_GO_POS_Y(YPosInChunk)) {
+        //No need to compute new chunk.
+        CurrentVoxelIndex += POS_Y_DELTA;
+        YPosInChunk++;
+    } else {
+        //We've hit the chunk boundary. Just calling setPosition() is the easiest way to resolve this.
+        SetPosition(XPosInVolume, YPosInVolume, ZPosInVolume);
+    }
 }
 
-void UVolumeSampler::MoveNegativeZ()
-{
-	ZPosInVolume--;
+void UVolumeSampler::MoveNegativeZ() {
+    ZPosInVolume--;
 
-	// Then we update the voxel pointer
-	if (CAN_GO_NEG_Z(ZPosInChunk))
-	{
-		//No need to compute new chunk.
-		CurrentVoxelIndex += NEG_Z_DELTA;
-		ZPosInChunk--;
-	}
-	else
-	{
-		//We've hit the chunk boundary. Just calling setPosition() is the easiest way to resolve this.
-		SetPosition(XPosInVolume, YPosInVolume, ZPosInVolume);
-	}
+    // Then we update the voxel pointer
+    if (CAN_GO_NEG_Z(ZPosInChunk)) {
+        //No need to compute new chunk.
+        CurrentVoxelIndex += NEG_Z_DELTA;
+        ZPosInChunk--;
+    } else {
+        //We've hit the chunk boundary. Just calling setPosition() is the easiest way to resolve this.
+        SetPosition(XPosInVolume, YPosInVolume, ZPosInVolume);
+    }
 }
 
-void UVolumeSampler::MovePositiveZ()
-{
-	ZPosInVolume++;
-	// Then we update the voxel pointer
-	if (CAN_GO_POS_Z(ZPosInChunk))
-	{
-		//No need to compute new chunk.
-		CurrentVoxelIndex += POS_Z_DELTA;
-		ZPosInChunk++;
-	}
-	else
-	{
-		//We've hit the chunk boundary. Just calling setPosition() is the easiest way to resolve this.
-		SetPosition(XPosInVolume, YPosInVolume, ZPosInVolume);
-	}
+void UVolumeSampler::MovePositiveZ() {
+    ZPosInVolume++;
+    // Then we update the voxel pointer
+    if (CAN_GO_POS_Z(ZPosInChunk)) {
+        //No need to compute new chunk.
+        CurrentVoxelIndex += POS_Z_DELTA;
+        ZPosInChunk++;
+    } else {
+        //We've hit the chunk boundary. Just calling setPosition() is the easiest way to resolve this.
+        SetPosition(XPosInVolume, YPosInVolume, ZPosInVolume);
+    }
 }

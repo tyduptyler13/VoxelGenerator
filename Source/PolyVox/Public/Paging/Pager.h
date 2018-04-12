@@ -37,21 +37,23 @@ class APagedChunk;
 * or other storage as appropriate.
 */
 UCLASS(Blueprintable)
-class POLYVOX_API UPager : public UObject
-{
-	GENERATED_BODY()
+class POLYVOX_API UPager : public UObject {
+    GENERATED_BODY()
 public:
-	/// Constructor
-	UPager() {};
-	/// Destructor
-	virtual ~UPager() {};
+    /// Constructor
+    UPager() {};
 
-	UFUNCTION(BlueprintNativeEvent, Category = "Pager")
-	void PageIn(const FRegion& Region, APagedChunk* Chunk);
-	UFUNCTION(BlueprintNativeEvent, Category = "Pager")
-	void PageOut(const FRegion& Region, APagedChunk* Chunk);
+    /// Destructor
+    virtual ~UPager() {};
+
+    UFUNCTION(BlueprintNativeEvent, Category = "Pager")
+    void PageIn(const FRegion &Region, APagedChunk *Chunk);
+
+    UFUNCTION(BlueprintNativeEvent, Category = "Pager")
+    void PageOut(const FRegion &Region, APagedChunk *Chunk);
 
 protected:
-	virtual void PageIn_Implementation(const FRegion& Region, APagedChunk* Chunk);
-	virtual void PageOut_Implementation(const FRegion& Region, APagedChunk* Chunk);
+    virtual void PageIn_Implementation(const FRegion &Region, APagedChunk *Chunk);
+
+    virtual void PageOut_Implementation(const FRegion &Region, APagedChunk *Chunk);
 };
