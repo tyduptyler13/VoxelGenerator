@@ -121,7 +121,7 @@ int32 UArrayHelper::Get1DIndexFrom2DIndicies(const int32 XPos, const int32 YPos,
 	int32 index = XPos + (YPos * RowLength);
 	if (index < 0)
 	{
-		UE_LOG(LogPolyVox, Error, TEXT("Returned an index which was below 0!"));
+		UE_LOG(LogPolyVox, Error, TEXT("Returned an index which was below 0! [" + XPos + ", " + YPos + ", " RowLength + "]"));
 		return 0;
 	}
 	return index;
