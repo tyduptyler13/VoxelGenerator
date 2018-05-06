@@ -118,9 +118,9 @@ UVoxelProceduralMeshComponent::CreateMeshSectionData(TArray<FVoxelTriangle> Tria
 
         // Add to vertex buffer
         // We need to add the vertices of each triangle in reverse or the mesh will be upside down
-        int32 index2 = meshSection.ProcVertexBuffer.Add(vertex2);
-        int32 index1 = meshSection.ProcVertexBuffer.Add(vertex1);
-        int32 index0 = meshSection.ProcVertexBuffer.Add(vertex0);
+        uint32 index2 = meshSection.ProcVertexBuffer.Add(vertex2);
+        uint32 index1 = meshSection.ProcVertexBuffer.Add(vertex1);
+        uint32 index0 = meshSection.ProcVertexBuffer.Add(vertex0);
 
         // Add to index buffer
         // Again, this is done in reverse
@@ -169,7 +169,7 @@ FVoxelMesh UVoxelProceduralMeshComponent::GetEncodedMesh(UPagedVolumeComponent *
 
     // A sampler pointing at the beginning of the region, which gets incremented to always point at the beginning of a slice.
 
-    UVolumeSampler startOfSlice((UPagedVolumeComponent *) Volume);
+    UVolumeSampler startOfSlice(Volume);
     startOfSlice.SetPosition(URegionHelper::GetLowerX(Region), URegionHelper::GetLowerY(Region),
                              URegionHelper::GetLowerZ(Region));
 

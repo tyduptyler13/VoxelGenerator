@@ -38,6 +38,7 @@ struct FVoxelMaterial;
 UCLASS(Blueprintable, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class POLYVOX_API UPagedVolumeComponent : public UActorComponent {
     friend class APagedVolume;
+
     GENERATED_BODY()
 
 public:
@@ -93,8 +94,7 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Volume|Utility")
     void FlushAll();
 
-    //UFUNCTION(BlueprintPure, Category = "Volume|Utility")
-    //virtual bool RegionIsEmpty(const FRegion& Region) override;
+    //UFUNCTION(BlueprintPure, Category = "Volume|Utility")    //virtual bool RegionIsEmpty(const FRegion& Region) override;
 
     UFUNCTION(BlueprintPure, Category = "Volume|Utility")
     virtual int32 CalculateSizeInBytes() const;
