@@ -121,7 +121,7 @@ UArrayHelper::Set2DFVector(TArray<FVector> &VectorArray, FVector ValueToSet, con
 int32 UArrayHelper::Get1DIndexFrom2DIndicies(const int32 XPos, const int32 YPos, const int32 RowLength) {
 	int32 index = XPos + (YPos * RowLength);
 	if (index < 0) {
-		UE_LOG(LogPolyVox, Error, TEXT("Returned an index which was below 0! [%s,%s,%s]"), XPos, YPos, RowLength);
+		UE_LOG(LogPolyVox, Error, TEXT("Returned an index which was below 0! [%f, %f, %i]"), XPos, YPos, RowLength);
 		return 0;
 	}
 	return index;
