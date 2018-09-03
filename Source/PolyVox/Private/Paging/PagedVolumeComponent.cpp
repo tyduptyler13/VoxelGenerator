@@ -558,3 +558,23 @@ void UPagedVolumeComponent::DrawVolumeAsDebug(const FRegion &DebugRegion) {
 		}
 	}
 }
+
+void UPagedVolumeComponent::PageInChunksAroundPoint(const FVector &position, uint8 maxChunkDistance,
+                                                    const TArray<FVoxelMaterial> &materials, bool bUseMarchingCubes) {
+	FVector regionCenter(position);
+	regionCenter.X /= VoxelSize;
+	regionCenter.Y /= VoxelSize;
+	regionCenter.Z = 0.0f;
+	FVector regionExtents = FVector(maxChunkDistance * ChunkSideLength);
+	FRegion pageInRegion = URegionHelper::CreateRegionFromVector(regionCenter - regionExtents,
+	                                                             regionCenter + regionExtents);
+	UE_LOG(LogPolyVox, Log,
+	       TEXT("Paging in chunks of distance %d around player position (%f, %f, %f), creating a region (%d, %d, %d) to (%d, %d, %d)."),
+	       maxChunkDistance, regionCenter.X, regionCenter.Y, regionCenter.Z, pageInRegion.LowerX,
+	       pageInRegion.LowerY, pageInRegion.LowerZ, pageInRegion.UpperX, pageInRegion.UpperY, pageInRegion.UpperZ);
+	if (bUseMarchingCubes) {
+		CreateMarchingCubesMesh(pageInRegion, materials);
+	} else {
+		unimplemented();
+	}
+}

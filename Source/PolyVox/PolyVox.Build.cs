@@ -10,7 +10,7 @@ public class PolyVox : ModuleRules
 	{
 		PublicIncludePaths.AddRange(
 			new string[] {
-				"PolyVox/Public",
+				//"PolyVox/Public",
 				// ... add public include paths required here ...
 			}
 			);
@@ -18,7 +18,7 @@ public class PolyVox : ModuleRules
 
 		PrivateIncludePaths.AddRange(
 			new string[] {
-				"PolyVox/Private",
+				//"PolyVox/Private",
 				// ... add other private include paths required here ...
 			}
 			);

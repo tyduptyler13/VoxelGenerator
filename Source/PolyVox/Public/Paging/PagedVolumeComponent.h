@@ -36,6 +36,7 @@ class APagedChunk;
 struct FVoxelMaterial;
 
 UCLASS(Blueprintable, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+
 class POLYVOX_API UPagedVolumeComponent : public UActorComponent {
 	friend class APagedVolume;
 
@@ -90,6 +91,12 @@ public:
 	virtual void PageInChunksAroundPlayer(AController* PlayerController, const int32 MaxWorldHeight,
 	                                      const uint8 NumberOfChunksToPageIn, TArray<FVoxelMaterial> Materials,
 	                                      bool bUseMarchingCubes);
+
+	UFUNCTION(BlueprintCallable, Category = "Volume|Voxels")
+
+	virtual void PageInChunksAroundPoint(const FVector &position, uint8 maxChunkDistance,
+	                                     const TArray<FVoxelMaterial> &materials,
+	                                     bool bUseMarchingCubes);
 
 	// Tries to ensure that the voxels within the specified Region are loaded into memory.
 	UFUNCTION(BlueprintCallable, Category = "Volume|Utility")
