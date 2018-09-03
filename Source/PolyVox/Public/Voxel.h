@@ -31,10 +31,10 @@ SOFTWARE.
  * 
  */
 USTRUCT(BlueprintType)
-struct POLYVOX_API FVoxel
-{
+
+struct POLYVOX_API FVoxel {
 	GENERATED_BODY()
-public:	
+public:
 	// An index referring to this voxel's "Material."
 	// This can be either a UENUM or a hardcoded uint8 value.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Voxel")
@@ -43,8 +43,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Voxel")
 	bool bIsSolid;
 
-	FVoxel()
-	{
+	FVoxel() {
 		Material = 0;
 		bIsSolid = false;
 	}

@@ -4,11 +4,11 @@
 
 #include "ModuleManager.h"
 
-class FPolyVoxModule : public IModuleInterface
-{
+class FPolyVoxModule : public IModuleInterface {
 public:
 
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
+
 	virtual void ShutdownModule() override;
 };

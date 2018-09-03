@@ -30,7 +30,7 @@ UObject *UArrayHelper::Get2DUObject(const TArray<UObject *> &ObjectArray, const 
 	if (index >= ObjectArray.Num()) {
 		UE_LOG(LogPolyVox, Error, TEXT("Returned an index (%d) which was outside the bounds of our array (%d)!"), index,
 		       ObjectArray.Num());
-		return 0;
+		return nullptr;
 	}
 	return ObjectArray[index];
 }
