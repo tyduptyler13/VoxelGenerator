@@ -10,8 +10,8 @@
  * 
  */
 UCLASS(Blueprintable)
-class POLYVOX_API UInfiniteNoisePager : public UPager
-{
+
+class POLYVOX_API UInfiniteNoisePager : public UPager {
 	GENERATED_BODY()
 public:
 	UInfiniteNoisePager();
@@ -43,7 +43,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Biomes")
 	bool bGenerateNewBiomes;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Biomes")
 	FVoxelNoiseSettings BiomeSelectorNoiseSettings;
 
